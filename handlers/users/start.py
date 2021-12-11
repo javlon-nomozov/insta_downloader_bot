@@ -3,21 +3,20 @@ from googletrans import Translator
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
 
-from data.config import CHANNELS, GROUPS
+from data.config import CHANNELS
 from keyboards.inline import check_button
 from loader import dp, bot
+from filters import IsPrivateFilter
 from utils.misc import subscription
 
 translator = Translator()
 
 
 # state="*" /har qaysi state(holatda) ham ishlaydi
-@dp.message_handler(CommandStart(), state="*")
+@dp.message_handler(IsPrivateFilter(), CommandStart(), state="*")
 # @dp.message_handler(commands=['start'], state="*")
 async def show_channels(msg: types.Message):
-    mention = msg.from_user.get_mention()
     user_lang = msg.from_user.language_code
-    await bot.send_message(GROUPS[0], text=f"til:{user_lang}\nuser:{mention}\ntype_message: start bosdi")
     fullname = msg.from_user.full_name
     text = f"Qadirli {fullname}, bot dan foydalanish uchun bu kannal(lar)ga obuna bo'ling"
     # await msg.answer(translator.translate(text=text, dest=user_lang).text)
