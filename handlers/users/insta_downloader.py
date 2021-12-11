@@ -58,6 +58,7 @@ async def insta_download(msg: types.Message):
     # album.attach_photo(caption="Downloaded by: <a href='t.me/zeepy_bot'>@zeepy_bot</a>")
     # logging.info(album)
     # album["caption"] = "<a href='t.me/zeepy_bot>Fo4u X 4our</a>"
+    await msg.reply_media_group(album)
     try:
         await msg.reply_media_group(album)
     except:
