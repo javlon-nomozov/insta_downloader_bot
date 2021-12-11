@@ -43,10 +43,10 @@ async def insta_download(msg: types.Message):
     videos = list()
     pictures = list()
     if vid_url:
-        videos = ("/ ".join(vid_url)).split()
+        videos = (" ".join(vid_url)).split()
 
     if pic_url:
-        pictures = ("/ ".join(pic_url)).split()
+        pictures = (" ".join(pic_url)).split()
 
     album = types.MediaGroup()
     if pictures:
