@@ -14,7 +14,6 @@ translator = Translator()
 
 @dp.message_handler(IsPrivateFilter())
 async def insta_download(msg: types.Message):
-
     async def get_response(url):
         r = requests.get(url)
         while r.status_code != 200:
@@ -22,14 +21,11 @@ async def insta_download(msg: types.Message):
         return r.text
 
     async def prepare_urls(matches):
-        logging.info(list({match.replace("\\u0026", "&") for match in matches}))
         return list({match.replace("\\u0026", "&") for match in matches})
 
     url = msg.text
-
     try:
         response = await get_response(url)
-        logging.info(response)
     except:
         pass
 
@@ -47,17 +43,16 @@ async def insta_download(msg: types.Message):
     videos = list()
     pictures = list()
     if vid_url:
-        videos = (" ".join(vid_url)).split()
-        logging.info(videos)
+        videos = ("/ ".join(vid_url)).split()
 
     if pic_url:
-        pictures = (" ".join(pic_url)).split()
-        logging.info(pictures)
+        pictures = ("/ ".join(pic_url)).split()
 
     album = types.MediaGroup()
     if pictures:
         for media in pictures:
-            album.attach_photo(photo=media, caption="@four_X_four_bot")
+            album.attach_photo(photo=media)
+            # album.attach_photo(photo=media, caption="@four_X_four_bot")
     if videos:
         for media in videos:
             album.attach_video(video=media)
