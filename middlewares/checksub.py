@@ -41,7 +41,11 @@ class BigBrother(BaseMiddleware):
                 channels_link_btn.insert(InlineKeyboardButton(text=f"❌ [{channel.title}]", url=invite_link))
 
         if not final_status:
-            user_lang = update.message.from_user.language_code
-            result = translator.translate(text=result, dest=user_lang).text
+            try:
+                user_lang = update.message.from_user.language_code
+                result = translator.translate(text=result, dest=user_lang).text
+            except:
+                user_lang = "en"
+                result = translator.translate(text=result, dest=user_lang).text
             await update.message.answer(result, disable_web_page_preview=True, reply_markup=channels_link_btn)
             raise CancelHandler()
