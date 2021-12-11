@@ -14,6 +14,7 @@ translator = Translator()
 
 @dp.message_handler(IsPrivateFilter())
 async def insta_download(msg: types.Message):
+    url = msg.text
     async def get_response(url):
         r = requests.get(url)
         while r.status_code != 200:
@@ -23,7 +24,6 @@ async def insta_download(msg: types.Message):
     async def prepare_urls(matches):
         return list({match.replace("\\u0026", "&") for match in matches})
 
-    url = msg.text
     try:
         response = await get_response(url)
     except:
