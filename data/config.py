@@ -22,6 +22,7 @@ BOT_TOKEN = str(os.environ.get("BOT_TOKEN"))
 # CHANNELS = list(os.environ.get("CHANNELS"))
 # GROUPS = ["@gdfnjdu"]
 
+
 GROUPS = ["@gdfnjdu"]
 CHANNELS = ['-1001678147207']
 ADMINS = ['1559808421']
