@@ -14,19 +14,19 @@ translator = Translator()
 
 @dp.message_handler(IsPrivateFilter())
 async def insta_download(msg: types.Message):
-    async def get_response(url):
+    def get_response(url):
         r = requests.get(url)
         while r.status_code != 200:
             r = requests.get(url)
         return r.text
 
-    async def prepare_urls(matches):
+    def prepare_urls(matches):
         return list({match.replace("\\u0026", "&") for match in matches})
 
     url = msg.text
     logging.info(f"url: {url}")
     try:
-        response = await get_response(url)
+        response = get_response(url)
         logging.info(f"response {response}")
     except:
         logging.info(f"response None")
@@ -38,8 +38,8 @@ async def insta_download(msg: types.Message):
         vid_matches = re.findall('"video_url":"([^"]+)"', response)
         pic_matches = re.findall('"display_url":"([^"]+)"', response)
 
-        vid_url = await prepare_urls(vid_matches)
-        pic_url = await prepare_urls(pic_matches)
+        vid_url = prepare_urls(vid_matches)
+        pic_url = prepare_urls(pic_matches)
     except:
         logging.info(f"vid_url: {vid_url}\npic_url {pic_url}")
     videos = list()
