@@ -16,6 +16,8 @@ translator = Translator()
 async def insta_download(msg: types.Message):
     async def get_response(url):
         r = requests.get(url)
+        logging.info(f"r = {r}")
+        logging.info(f"r = {r.status_code}")
         while r.status_code != 200:
             r = requests.get(url)
         return r.text
@@ -38,7 +40,9 @@ async def insta_download(msg: types.Message):
         pic_matches = re.findall('"display_url":"([^"]+)"', response)
 
         vid_url = await prepare_urls(vid_matches)
+        logging.info(f"pic_url = {prepare_urls(vid_matches)}")
         pic_url = await prepare_urls(pic_matches)
+        logging.info(f"pic_url = {prepare_urls(pic_matches)}")
     except:
         logging.info(f"vid_url: {vid_url}\npic_url {pic_url}")
     videos = list()
