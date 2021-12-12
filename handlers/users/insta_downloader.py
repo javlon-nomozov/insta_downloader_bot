@@ -44,9 +44,11 @@ async def insta_download(msg: types.Message):
     pictures = list()
     if vid_url:
         videos = ("/ ".join(vid_url)).split()
+        logging.info(f"videos {videos}")
 
     if pic_url:
         pictures = ("/ ".join(pic_url)).split()
+        logging.info(f"pictures {pictures}")
 
     album = types.MediaGroup()
     if pictures:
@@ -57,7 +59,7 @@ async def insta_download(msg: types.Message):
         for media in videos:
             album.attach_video(video=media)
     # album.attach_photo(caption="Downloaded by: <a href='t.me/zeepy_bot'>@zeepy_bot</a>")
-    # logging.info(album)
+    logging.info(album)
     # album["caption"] = "<a href='t.me/zeepy_bot>Fo4u X 4our</a>"
     # await msg.reply_media_group(album)
     try:
