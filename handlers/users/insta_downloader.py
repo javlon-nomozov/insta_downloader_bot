@@ -23,12 +23,18 @@ async def insta_download(msg: types.Message):
         return r.text
 
     async def prepare_urls(matches):
-        return list({match.replace("\\u0026", "&") for match in matches})
+        logging.info(f"matches = {matches}")
+        foo = {}
+        for match in matches:
+            match.replace("\\u0026", "&")
+
+            foo = {match}
+        return list(foo)
 
     url = msg.text
     logging.info(f"url: {url}")
     try:
-        response = get_response(url)
+        response = await get_response(url)
     except:
         logging.info(f"response None")
 
