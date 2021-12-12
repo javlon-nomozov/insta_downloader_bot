@@ -57,6 +57,7 @@ async def insta_download(msg: types.Message):
     try:
         await msg.reply_media_group(media=album)
         logging.info(album)
+
     except:
         await msg.reply(text="Could not recognize the media in the provided URL.")
 
