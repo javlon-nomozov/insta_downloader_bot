@@ -24,10 +24,12 @@ async def insta_download(msg: types.Message):
         return list({match.replace("\\u0026", "&") for match in matches})
 
     url = msg.text
+    logging.info(f"url: {url}")
     try:
         response = await get_response(url)
+        logging.info(f"response {response}")
     except:
-        pass
+        logging.info(f"response None")
 
     vid_url = ''
     pic_url = ''
@@ -39,7 +41,7 @@ async def insta_download(msg: types.Message):
         vid_url = await prepare_urls(vid_matches)
         pic_url = await prepare_urls(pic_matches)
     except:
-        pass
+        logging.info(f"vid_url: {vid_url}\npic_url {pic_url}")
     videos = list()
     pictures = list()
     if vid_url:
