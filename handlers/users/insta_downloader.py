@@ -27,7 +27,6 @@ async def insta_download(msg: types.Message):
     logging.info(f"url: {url}")
     try:
         response = get_response(url)
-        logging.info(f"response {response}")
     except:
         logging.info(f"response None")
 
@@ -64,7 +63,7 @@ async def insta_download(msg: types.Message):
     logging.info(album)
     # album["caption"] = "<a href='t.me/zeepy_bot>Fo4u X 4our</a>"
     # await msg.reply_media_group(album)
-    try:
-        await msg.reply_media_group(album)
-    except:
-        await msg.reply("this link does not work\nMaybe this private users post")
+    # try:
+    await msg.reply_media_group(album)
+    # except:
+    #     await msg.reply("this link does not work\nMaybe this private users post")
